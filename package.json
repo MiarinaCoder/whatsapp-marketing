@@ -1,0 +1,38 @@
+{
+  "name": "whatsapp-marketing",
+  "version": "1.0.0",
+  "description": "Plateforme WhatsApp Marketing - JVN Lab",
+  "main": "dist/server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "db:migrate": "psql $DATABASE_URL -f src/db/migrations/001_initial.sql"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/formbody": "^7.4.0",
+    "bullmq": "^5.0.0",
+    "dotenv": "^16.0.0",
+    "fastify": "^4.28.0",
+    "ioredis": "^5.3.0",
+    "pg": "^8.11.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/pg": "^8.11.0",
+    "@types/supertest": "^6.0.0",
+    "@vitest/coverage-v8": "^1.0.0",
+    "supertest": "^7.0.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.0.0"
+  }
+}
