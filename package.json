@@ -8,9 +8,11 @@
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
+    "worker": "tsx watch src/workers/message.worker.ts",
+    "worker:start": "node dist/workers/message.worker.js",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "db:migrate": "psql $DATABASE_URL -f src/db/migrations/001_initial.sql"
+    "db:migrate": "psql $DATABASE_URL -f src/db/001_initial.sql"
   },
   "keywords": [],
   "author": "",

@@ -50,3 +50,15 @@ CREATE TABLE attributions (
 CREATE INDEX idx_scheduled_messages_status ON scheduled_messages(status, scheduled_at);
 CREATE INDEX idx_scheduled_messages_contact ON scheduled_messages(tenant_id, contact_phone, sent_at);
 CREATE INDEX idx_attributions_order ON attributions(order_id);
+
+-- Row Level Security pour isolation multi-tenant
+ALTER TABLE sequences ENABLE ROW LEVEL SECURITY;
+ALTER TABLE sequence_steps ENABLE ROW LEVEL SECURITY;
+ALTER TABLE scheduled_messages ENABLE ROW LEVEL SECURITY;
+ALTER TABLE attributions ENABLE ROW LEVEL SECURITY;
+
+-- Politiques RLS : chaque tenant ne voit que ses données
+CREATE POLICY tenant_sequences ON sequences FOR ALL USING (tenant_id = current_setting('app.tenant_id')::uuid);
+CREATE POLICY tenant_sequence_steps ON sequence_steps FOR ALL USING (sequence_id IN (SELECT id FROM sequences WHERE tenant_id = current_setting('app.tenant_id')::uuid));
+CREATE POLICY tenant_scheduled_messages ON scheduled_messages FOR ALL USING (tenant_id = current_setting('app.tenant_id')::uuid);
+CREATE POLICY tenant_attributions ON attributions FOR ALL USING (tenant_id = current_setting('app.tenant_id')::uuid);
