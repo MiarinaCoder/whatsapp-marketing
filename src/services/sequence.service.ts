@@ -1,6 +1,6 @@
 import { Pool } from 'pg';
 import { Queue } from 'bullmq';
-import { WhatsAppEvent } from '../types';
+import { WhatsAppEvent } from '../types/index.js';
 
 const db = new Pool({ connectionString: process.env.DATABASE_URL });
 const messageQueue = new Queue('scheduled-messages', {

@@ -1,4 +1,4 @@
-import Redis from 'ioredis';
+import { Redis } from 'ioredis';
 
 const redis = new Redis(process.env.REDIS_URL!);
 const TTL_24H = 24 * 60 * 60;
